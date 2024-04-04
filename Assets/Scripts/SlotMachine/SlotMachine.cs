@@ -43,7 +43,8 @@ public class SlotMachine : MonoBehaviour
         foreach (Combinations i in combinations)
         {
             Debug.Log(slots[0].gameObject.GetComponent<Slot>().stoppedSlot.ToString());
-            Debug.Log(i.FirstValue.ToString());
+            Debug.Log(slots[1].gameObject.GetComponent<Slot>().stoppedSlot.ToString());
+            Debug.Log(slots[2].gameObject.GetComponent<Slot>().stoppedSlot.ToString());
             if (slots[0].gameObject.GetComponent<Slot>().stoppedSlot.ToString() == i.FirstValue.ToString()
                 && slots[1].gameObject.GetComponent<Slot>().stoppedSlot.ToString() == i.SecondValue.ToString()
                 && slots[2].gameObject.GetComponent<Slot>().stoppedSlot.ToString() == i.ThirdValue.ToString())

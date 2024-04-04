@@ -19,10 +19,11 @@ public class Slot : MonoBehaviour
     public SlotValue stoppedSlot;
     SlotMachine _slotMachine;
 
-    private void Start()
+    void Start()
     {
         _slotMachine = gameObject.GetComponentInParent<SlotMachine>();
     }
+
     public IEnumerator Spin()
     {
         timeInterval = _slotMachine.timeInterval;
@@ -32,39 +33,38 @@ public class Slot : MonoBehaviour
         {
             speed = speed / 1.01f;
             transform.Translate(Vector2.up * Time.deltaTime * -speed);
-            if (transform.localPosition.y <= -1.5f)
+            if (transform.localPosition.y <= -2.25f)
             {
                 transform.localPosition = new Vector2(transform.localPosition.x, 1.5f);
             }
 
             yield return new WaitForSeconds(timeInterval);
         }
-        StartCoroutine("EndSpin");
+        StartCoroutine(IEndSpin());
         yield return null;
     }
-    private IEnumerator EndSpin()
+    
+    IEnumerator IEndSpin()
     {
         Vector2 newPos = Vector2.zero;
-        print("endSpin " + gameObject.name);
+        float x = -1.5f;
+        float y = 0;
         while (speed >= 2f)
         {
             newPos = new Vector2(transform.localPosition.x, 0f);
 
-            if (transform.localPosition.y < -0.75f)
+            for (int i = 0; i < 5; i++)
             {
-                newPos.y = -1.5f;
-            }
-            else if (transform.localPosition.y < 0f)
-            {
-                newPos.y = -0.75f;
-            }
-            else if (transform.localPosition.y < 0.75f)
-            {
-                newPos.y = 0f;
-            }
-            else if (transform.localPosition.y < 1.5f)
-            {
-                newPos.y = 0.75f;
+                if (transform.localPosition.y < x)
+                {
+                    y = x - 0.75f;
+                    newPos.y = y;
+                    break;
+                }
+                else
+                {
+                    x += 0.75f;
+                }
             }
 
             transform.localPosition = Vector2.MoveTowards(transform.localPosition, newPos, speed * Time.deltaTime);
@@ -81,27 +81,26 @@ public class Slot : MonoBehaviour
         CheckResults();
         yield return null;
     }
-    private void CheckResults()
+
+    void CheckResults()
     {
-        if (transform.localPosition.y == -1.5f)
+        switch (transform.localPosition.y)
         {
-            stoppedSlot = SlotValue.Banana;
-        }
-        else if (transform.localPosition.y == -0.75f)
-        {
-            stoppedSlot = SlotValue.Cherry;
-        }
-        else if (transform.localPosition.y == 0f)
-        {
-            stoppedSlot = SlotValue.Clover;
-        }
-        else if (transform.localPosition.y == 0.75f)
-        {
-            stoppedSlot = SlotValue.Strawbery;
-        }
-        else if (transform.localPosition.y == 1.5f)
-        {
-            stoppedSlot = SlotValue.Grape;
+            case -1.5f:
+                stoppedSlot = SlotValue.Banana;
+                break;
+            case -0.75f:
+                stoppedSlot = SlotValue.Cherry;
+                break;
+            case 0:
+                stoppedSlot = SlotValue.Clover;
+                break;
+            case 0.75f:
+                stoppedSlot = SlotValue.Strawbery;
+                break;
+            default:
+                stoppedSlot = SlotValue.Grape;
+                break;
         }
 
         _slotMachine.WaitResults();
