@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: fb97b161334600f4eb9d856568a7276a
+guid: 01cd5ba04efd59e43bce720ccc4f2ba2
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -127,9 +127,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 2288.5715
+        y: 2339
         width: 512
-        height: 381.42856
+        height: 500
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,8 +137,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d2b4540ec331f1e43a15cdd5ff82e809
-      internalID: -149425451
+      spriteID: 0001391034c66d1429ebda02dcac8455
+      internalID: -1603152708
       vertices: []
       indices: 
       edges: []
@@ -148,9 +148,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 1907.5714
+        y: 1906
         width: 512
-        height: 381.42856
+        height: 500
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,8 +158,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cae2576cb2b323b43a3cb8320cbf118c
-      internalID: 952758056
+      spriteID: 08bbead1b2b96c2468134d3c253815d1
+      internalID: -27824313
       vertices: []
       indices: 
       edges: []
@@ -169,9 +169,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 1511
+        y: 1484
         width: 512
-        height: 381
+        height: 500
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,8 +179,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2de7b1c42b3372c4c8d0ad4bd1c4ad06
-      internalID: -1952519367
+      spriteID: dfe9203773aebee49876685a562f6f37
+      internalID: 1426737014
       vertices: []
       indices: 
       edges: []
@@ -190,9 +190,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 1122
+        y: 1067
         width: 512
-        height: 381
+        height: 500
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -200,8 +200,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8653d8741e1dbc34db748b72a11c18ad
-      internalID: 2027235218
+      spriteID: c937d3975cf37524e881f9e13dc66da4
+      internalID: 830193420
       vertices: []
       indices: 
       edges: []
@@ -211,9 +211,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 728
+        y: 660
         width: 512
-        height: 381
+        height: 500
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -221,50 +221,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 487906598f785804b94909cf2da4ee7d
-      internalID: -1672371767
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: slot_grape2
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 346
-        width: 512
-        height: 381
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6577ebb46b366064288ae2f7e6bb2979
-      internalID: -1101911124
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: slot_diamond
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 512
-        height: 312
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b3ba3f1082d69ea40b91ce2cdf4ab176
-      internalID: -721346078
+      spriteID: b5d497402913fd4438318b2ca5d6d5d6
+      internalID: 2016346744
       vertices: []
       indices: 
       edges: []
@@ -280,13 +238,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      slot_banana: -149425451
-      slot_cherry: 952758056
-      slot_clover: -1672371767
-      slot_diamond: -721346078
-      slot_grape: -1952519367
-      slot_grape2: -1101911124
-      slot_strawberry: 2027235218
+      slot_banana: -1603152708
+      slot_cherry: -27824313
+      slot_clover: 2016346744
+      slot_grape: 1426737014
+      slot_strawberry: 830193420
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

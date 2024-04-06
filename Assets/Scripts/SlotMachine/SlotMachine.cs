@@ -5,22 +5,33 @@ using UnityEngine.UI;
 
 public class SlotMachine : MonoBehaviour
 {
-    public int money;
-    public int price;
-    public Slot[] slots;
-    public Combinations[] combinations;
-    public float timeInterval = 0.025f;
-    private int stoppedSlots = 3;
-    private bool isSpin = false;
-    public bool isAuto;
 
+    [SerializeField] Slot[] _slots;
+    [SerializeField] Combinations[] _combinations;
+
+    public float _timeInterval = 0.025f;
+
+    [SerializeField] int _price;
+    [SerializeField] bool _isAuto;
+
+    int _stoppedSlots = 3;
+    bool _isSpin = false;
+
+    MoneyManager _moneyManager;
+    Animator _animator;
+    private void Start()
+    {
+        _moneyManager = MoneyManager.Instance;
+        _animator = GetComponent<Animator>();
+    }
     public void Spin()
     {
-        if (!isSpin && money - price >= 0)
+        if (!_isSpin && _moneyManager.GetMoney() - _price >= 0)
         {
-            ChangeMoney(-price);
-            isSpin = true;
-            foreach (Slot i in slots)
+            _moneyManager.ChangeMoney(-_price);
+            _isSpin = true;
+            _animator.SetTrigger("Spin");
+            foreach (Slot i in _slots)
             {
                 i.StartCoroutine("Spin");
             }
@@ -29,50 +40,50 @@ public class SlotMachine : MonoBehaviour
 
     public void WaitResults()
     {
-        stoppedSlots -= 1;
-        if(stoppedSlots <= 0)
+        _stoppedSlots -= 1;
+        if(_stoppedSlots <= 0)
         {
-            stoppedSlots = 3;
+            _stoppedSlots = 3;
             CheckResults();
         }
     }
 
     public void CheckResults()
     {
-        isSpin = false;
-        foreach (Combinations i in combinations)
+        Debug.Log(_slots[0].stoppedSlot.ToString());
+        Debug.Log(_slots[1].stoppedSlot.ToString());
+        Debug.Log(_slots[2].stoppedSlot.ToString());
+
+        _isSpin = false;
+
+        foreach (Combinations combination in _combinations)
         {
-            Debug.Log(slots[0].gameObject.GetComponent<Slot>().stoppedSlot.ToString());
-            Debug.Log(slots[1].gameObject.GetComponent<Slot>().stoppedSlot.ToString());
-            Debug.Log(slots[2].gameObject.GetComponent<Slot>().stoppedSlot.ToString());
-            if (slots[0].gameObject.GetComponent<Slot>().stoppedSlot.ToString() == i.FirstValue.ToString()
-                && slots[1].gameObject.GetComponent<Slot>().stoppedSlot.ToString() == i.SecondValue.ToString()
-                && slots[2].gameObject.GetComponent<Slot>().stoppedSlot.ToString() == i.ThirdValue.ToString())
+            if (_slots[0].stoppedSlot.ToString() == combination.FirstValue.ToString()
+                && _slots[1].stoppedSlot.ToString() == combination.SecondValue.ToString()
+                && _slots[2].stoppedSlot.ToString() == combination.ThirdValue.ToString())
             {
-                ChangeMoney(i.prize);
+                _moneyManager.ChangeMoney(combination.prize);
+                break;
             }
         }
-        if (isAuto)
+        if (_isAuto)
         {
             Invoke("Spin", 0.4f);
         }
     }
-    private void ChangeMoney(int count)
-    {
-        money += count;
-    }
+
     public void SetAuto()
     {
-        if (!isAuto)
+        if (!_isAuto)
         {
-            timeInterval /= 10;
-            isAuto = true;
+            _timeInterval /= 10;
+            _isAuto = true;
             Spin();
         }
         else
         {
-            timeInterval *= 10;
-            isAuto = false;
+            _timeInterval *= 10;
+            _isAuto = false;
         }
     }
 }

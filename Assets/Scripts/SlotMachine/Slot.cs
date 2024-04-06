@@ -26,16 +26,16 @@ public class Slot : MonoBehaviour
 
     public IEnumerator Spin()
     {
-        timeInterval = _slotMachine.timeInterval;
+        timeInterval = _slotMachine._timeInterval;
         randomValue = Random.Range(0, 90);
         speed = 30f + randomValue;
         while(speed >= 10f)
         {
             speed = speed / 1.01f;
             transform.Translate(Vector2.up * Time.deltaTime * -speed);
-            if (transform.localPosition.y <= -2.25f)
+            if (transform.localPosition.y <= -3f)
             {
-                transform.localPosition = new Vector2(transform.localPosition.x, 1.5f);
+                transform.localPosition = new Vector2(transform.localPosition.x, 2f);
             }
 
             yield return new WaitForSeconds(timeInterval);
@@ -47,7 +47,7 @@ public class Slot : MonoBehaviour
     IEnumerator IEndSpin()
     {
         Vector2 newPos = Vector2.zero;
-        float x = -1.5f;
+        float x = -4f;
         float y = 0;
         while (speed >= 2f)
         {
@@ -57,13 +57,13 @@ public class Slot : MonoBehaviour
             {
                 if (transform.localPosition.y < x)
                 {
-                    y = x - 0.75f;
+                    y = x - 1f;
                     newPos.y = y;
                     break;
                 }
                 else
                 {
-                    x += 0.75f;
+                    x += 1f;
                 }
             }
 
@@ -86,16 +86,16 @@ public class Slot : MonoBehaviour
     {
         switch (transform.localPosition.y)
         {
-            case -1.5f:
+            case -2f:
                 stoppedSlot = SlotValue.Banana;
                 break;
-            case -0.75f:
+            case -1f:
                 stoppedSlot = SlotValue.Cherry;
                 break;
-            case 0:
+            case 0f:
                 stoppedSlot = SlotValue.Clover;
                 break;
-            case 0.75f:
+            case 1f:
                 stoppedSlot = SlotValue.Strawbery;
                 break;
             default:
