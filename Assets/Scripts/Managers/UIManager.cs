@@ -7,22 +7,45 @@ using DG.Tweening;
 
 public class UIManager : MonoBehaviour
 {
+    [SerializeField] Transform[] _gameCanvases;
+    [SerializeField] Transform _switchTarget;
+
     [SerializeField] TextMeshProUGUI _moneyText;
     [SerializeField] TextMeshProUGUI _perClickMoneyText;
     [SerializeField] TextMeshProUGUI _passiveMoneyText;
     [SerializeField] Image[] _screenButtons;
 
     MoneyManager _moneyManager;
-
+    Vector3[] _startCanvasPositions = new Vector3[2];
     private void Start()
     {
         _moneyManager = MoneyManager.Instance;
+        _startCanvasPositions[0] = _gameCanvases[0].position;
+        _startCanvasPositions[1] = _gameCanvases[1].position;
     }
     private void Update()
     {
         _moneyText.text = _moneyManager.GetMoneyInfo(0).ToString() + " $";
         _perClickMoneyText.text = _moneyManager.GetMoneyInfo(1).ToString() + " $";
         _passiveMoneyText.text = _moneyManager.GetMoneyInfo(2).ToString() + " $";
+    }
+
+    public void ChangeCanvas(bool isSlotCanvas)
+    {
+        if(isSlotCanvas)
+        {
+            for (int i = 0; i < _gameCanvases.Length; i++)
+            {
+                _gameCanvases[i].DOMoveX(-_startCanvasPositions[i].x, 1f);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < _gameCanvases.Length; i++)
+            {
+                _gameCanvases[i].DOMoveX(_startCanvasPositions[i].x, 1f);
+            }
+        }
     }
 
     public void SetButtonColor(bool isGambling)
