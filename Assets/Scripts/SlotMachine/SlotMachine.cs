@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class SlotMachine : MonoBehaviour
 {
-
     [SerializeField] Slot[] _slots;
     [SerializeField] Combinations[] _combinations;
 
@@ -26,14 +25,19 @@ public class SlotMachine : MonoBehaviour
     }
     public void Spin()
     {
-        if (!_isSpin && _moneyManager.GetMoney() - _price >= 0)
+        if (!_isSpin)
         {
-            _moneyManager.ChangeMoney(-_price);
-            _isSpin = true;
-            _animator.SetTrigger("Spin");
-            foreach (Slot i in _slots)
+            if (_moneyManager.GetMoneyInfo(0) - _price >= 0)
             {
-                i.StartCoroutine("Spin");
+                _animator.SetTrigger("Spin");
+                _moneyManager.ChangeMoney(-_price);
+                _isSpin = true;
+                foreach (Slot i in _slots)
+                {
+                    i.StartCoroutine("Spin");
+                }
+
+                SoundManager.Instance.PlaySound(SoundManager.Sound.SlotMachineStart);
             }
         }
     }
@@ -63,6 +67,8 @@ public class SlotMachine : MonoBehaviour
                 && _slots[2].stoppedSlot.ToString() == combination.ThirdValue.ToString())
             {
                 _moneyManager.ChangeMoney(combination.prize);
+                EffectsManager.Instance.WinParticle();
+                SoundManager.Instance.PlaySound(SoundManager.Sound.Win);
                 break;
             }
         }
