@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.VisionOS;
@@ -11,6 +12,7 @@ public class EffectsManager : MonoBehaviour
     [SerializeField] GameObject _chipParticle;
     [SerializeField] Transform[] _chipSpawnPoints;
     [SerializeField] ParticleSystem _winParticle;
+    [SerializeField] GameObject _winText;
 
 
     private void Awake()
@@ -33,5 +35,7 @@ public class EffectsManager : MonoBehaviour
     public void WinParticle()
     {
         _winParticle.Play();
+        _winText.SetActive(true);
+        _winText.transform.DOShakeScale(3f, 1f, 5).OnComplete(() => _winText.SetActive(false));
     }
 }

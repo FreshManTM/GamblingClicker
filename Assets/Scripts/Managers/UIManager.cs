@@ -79,7 +79,7 @@ public class UIManager : MonoBehaviour
         button.transform.DOScale(newScale, .1f).OnComplete(() => button.transform.DOScale(Vector2.one, .1f));
     }
 
-    public void ComabinationButton(GameObject panel)
+    public void OpenPanelButton(GameObject panel)
     {
         if ((Vector2)panel.transform.localScale == Vector2.one)
         {
