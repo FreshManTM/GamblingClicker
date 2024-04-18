@@ -25,9 +25,9 @@ public class UIManager : MonoBehaviour
     }
     private void Update()
     {
-        _moneyText.text = _moneyManager.GetMoneyInfo(0).ToString() + " $";
-        _perClickMoneyText.text = _moneyManager.GetMoneyInfo(1).ToString() + " $";
-        _passiveMoneyText.text = _moneyManager.GetMoneyInfo(2).ToString() + " $";
+        _moneyText.text = _moneyManager.GetMoneyInfo(0).ToString();
+        _perClickMoneyText.text = _moneyManager.GetMoneyInfo(1).ToString();
+        _passiveMoneyText.text = _moneyManager.GetMoneyInfo(2).ToString();
     }
 
     public void ChangeCanvas(bool isSlotCanvas)
