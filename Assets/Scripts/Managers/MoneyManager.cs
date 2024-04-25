@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class MoneyManager : MonoBehaviour
@@ -120,8 +118,8 @@ public class MoneyManager : MonoBehaviour
         PlayerPrefs.SetInt("_moneyPerClick", _moneyPerClick);
         PlayerPrefs.SetInt("_passiveMoney", _passiveMoney);
         //Debug only, remove before build
-        if(_progressMoney < _money)
-            _progressMoney = _money;
+        //if(_progressMoney < _money)
+        //    _progressMoney = _money;
         PlayerPrefs.SetInt("_progressMoney", _progressMoney);
     }
 

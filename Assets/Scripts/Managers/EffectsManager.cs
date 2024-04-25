@@ -1,7 +1,4 @@
 using DG.Tweening;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.VisionOS;
 using UnityEngine;
 
 public class EffectsManager : MonoBehaviour
@@ -36,6 +33,6 @@ public class EffectsManager : MonoBehaviour
     {
         _winParticle.Play();
         _winText.SetActive(true);
-        _winText.transform.DOShakeScale(3f, 1f, 5).OnComplete(() => _winText.SetActive(false));
+        _winText.transform.DOShakeScale(3f, .4f, 5).OnComplete(() => _winText.SetActive(false));
     }
 }
