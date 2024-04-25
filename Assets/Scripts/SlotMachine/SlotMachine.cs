@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 
 public class SlotMachine : MonoBehaviour
 {
@@ -14,19 +15,22 @@ public class SlotMachine : MonoBehaviour
     bool _isSpin = false;
 
     MoneyManager _moneyManager;
-    Animator _animator;
+    [SerializeField] Transform _lever;
     private void Start()
     {
         _moneyManager = MoneyManager.Instance;
-        _animator = GetComponent<Animator>();
     }
+
     public void Spin()
     {
         if (!_isSpin)
         {
             if (_moneyManager.GetMoneyInfo(0) - _price >= 0)
             {
-                _animator.SetTrigger("Spin");
+                Quaternion leverDefaultRotation = new Quaternion(0, 0, 0, 1);
+                Quaternion leverRotation = new Quaternion(-0.42262f, 0.00000f, 0.00000f, 0.90631f);
+                _lever.DOLocalRotateQuaternion(leverRotation, .2f).OnComplete(() => _lever.DOLocalRotateQuaternion(leverDefaultRotation, .2f));
+
                 _moneyManager.ChangeMoney(-_price);
                 _isSpin = true;
                 foreach (Slot i in _slots)
@@ -35,6 +39,13 @@ public class SlotMachine : MonoBehaviour
                 }
 
                 SoundManager.Instance.PlaySound(SoundManager.Sound.SlotMachineStart);
+            }
+            else if(Mathf.Abs(transform.localEulerAngles.z) < 0.01f)
+            {
+                EffectsManager.Instance.NotEnoutghMoneyAnim();
+
+                Vector3 punch = new Vector3(0, 0, 2f);
+                transform.DOPunchRotation(punch, .3f, 13);
             }
         }
     }

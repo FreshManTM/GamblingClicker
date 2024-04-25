@@ -99,6 +99,10 @@ public class MoneyManager : MonoBehaviour
 
             _soundManager.PlaySound(SoundManager.Sound.Upgrade);
         }
+        else
+        {
+            _effectsManager.NotEnoutghMoneyAnim();
+        }
     }
     public void IncreasePassiveMoney()
     {
@@ -109,6 +113,10 @@ public class MoneyManager : MonoBehaviour
             ChangeMoney(-price);
 
             _soundManager.PlaySound(SoundManager.Sound.Upgrade);
+        }
+        else
+        {
+            _effectsManager.NotEnoutghMoneyAnim();
         }
     }
 
