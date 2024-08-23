@@ -51,7 +51,7 @@ public class MoneyManager : MonoBehaviour
     public void OnClick()
     {
         ChangeMoney(_moneyPerClick);
-        _effectsManager.SpawnDollarParticle();
+        _effectsManager.SpawnCoinParticle();
         _soundManager.PlaySound(SoundManager.Sound.Tap);
     }
 
@@ -102,6 +102,8 @@ public class MoneyManager : MonoBehaviour
         else
         {
             _effectsManager.NotEnoutghMoneyAnim();
+            _soundManager.PlaySound(SoundManager.Sound.Fail);
+
         }
     }
     public void IncreasePassiveMoney()
@@ -117,6 +119,7 @@ public class MoneyManager : MonoBehaviour
         else
         {
             _effectsManager.NotEnoutghMoneyAnim();
+            _soundManager.PlaySound(SoundManager.Sound.Fail);
         }
     }
 
@@ -125,9 +128,6 @@ public class MoneyManager : MonoBehaviour
         PlayerPrefs.SetInt("_money", _money);
         PlayerPrefs.SetInt("_moneyPerClick", _moneyPerClick);
         PlayerPrefs.SetInt("_passiveMoney", _passiveMoney);
-        //Debug only, remove before build
-        //if(_progressMoney < _money)
-        //    _progressMoney = _money;
         PlayerPrefs.SetInt("_progressMoney", _progressMoney);
     }
 

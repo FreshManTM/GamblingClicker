@@ -1,24 +1,27 @@
 ﻿using DG.Tweening;
 using UnityEngine;
 
-public class SlotMachine : MonoBehaviour
+public class SMachine : MonoBehaviour
 {
-    [SerializeField] Slot[] _slots;
+    [SerializeField] Slots[] _slots;
     [SerializeField] Combinations[] _combinations;
+    [SerializeField] Transform _lever;
 
     public float _timeInterval = 0.025f;
 
     [SerializeField] int _price;
-    [SerializeField] bool _isAuto;
 
     int _stoppedSlots = 3;
     bool _isSpin = false;
 
     MoneyManager _moneyManager;
-    [SerializeField] Transform _lever;
+    EffectsManager _effectsManager;
+    SoundManager _soundManager;
     private void Start()
     {
         _moneyManager = MoneyManager.Instance;
+        _effectsManager = EffectsManager.Instance;
+        _soundManager = SoundManager.Instance;
     }
 
     public void Spin()
@@ -33,16 +36,17 @@ public class SlotMachine : MonoBehaviour
 
                 _moneyManager.ChangeMoney(-_price);
                 _isSpin = true;
-                foreach (Slot i in _slots)
+                foreach (Slots i in _slots)
                 {
                     i.StartCoroutine("Spin");
                 }
 
-                SoundManager.Instance.PlaySound(SoundManager.Sound.SlotMachineStart);
+                _soundManager.PlaySound(SoundManager.Sound.SlotMachineStart);
             }
             else if(Mathf.Abs(transform.localEulerAngles.z) < 0.01f)
             {
-                EffectsManager.Instance.NotEnoutghMoneyAnim();
+                _effectsManager.NotEnoutghMoneyAnim();
+                _soundManager.PlaySound(SoundManager.Sound.Fail);
 
                 Vector3 punch = new Vector3(0, 0, 2f);
                 transform.DOPunchRotation(punch, .3f, 13);
@@ -75,29 +79,10 @@ public class SlotMachine : MonoBehaviour
                 && _slots[2].stoppedSlot.ToString() == combination.ThirdValue.ToString())
             {
                 _moneyManager.ChangeMoney(combination.prize);
-                EffectsManager.Instance.WinParticle();
-                SoundManager.Instance.PlaySound(SoundManager.Sound.Win);
+                _effectsManager.WinParticle();
+                _soundManager.PlaySound(SoundManager.Sound.Win);
                 break;
             }
-        }
-        if (_isAuto)
-        {
-            Invoke("Spin", 0.4f);
-        }
-    }
-
-    public void SetAuto()
-    {
-        if (!_isAuto)
-        {
-            _timeInterval /= 10;
-            _isAuto = true;
-            Spin();
-        }
-        else
-        {
-            _timeInterval *= 10;
-            _isAuto = false;
         }
     }
 }
@@ -107,11 +92,11 @@ public class Combinations
 {
     public enum SlotValue
     {
-        Banana,
-        Cherry,
-        Clover,
-        Strawbery,
-        Grape
+        J,
+        A,
+        X,
+        Flower,
+        Heart
     }
 
     public SlotValue FirstValue;
